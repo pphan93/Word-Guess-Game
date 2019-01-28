@@ -1,25 +1,50 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
-    
+
 </head>
+
 <body>
-    
-    <h1>Hangman</h1>
-    <div id="gameContainer">
-        Key Pressed: <span id="kp"></span>
-        <br>
-        WORD: <span id="wordBox"></span>
-        <br>
-        STATUS: <span id="status"></span>
+    <div class="jumbotron jumbotron-fluid text-center">
+                <div class="
+        container">
+        <h1 class="display-4">Hangman</h1>
+        <p class="lead">Use the keyboard to guess the word. You have 13 lives before game over.</p>
+    </div>
     </div>
 
+    <div class="container text-center">
+        <div id="gameContainer">
+            Key Pressed: <span class="clear" id="kp"></span>
+            <br>
+            WORD: <span class="clear" id="wordBox"></span>
+            <br>
+            <div id="hold">
+            </div>
+            <div id="listView">
+                <ul id="myList" class="myList-class">
+                </ul>
+            </div>
 
+            <br>
+            Guesses Remaining: <span class="clear" id="guessRemaining"></span>
+            <br>
+            Guessed Letters: <span class="clear" id="guessedL"></span>
+            <br>
+            STATUS: <span class="clear" id="status"></span>
+            <br>
+            Restart In: <div class="clear" id="countdown"></div>
+        </div>
+    </div>
     <script src="./assets/javascript/game.js"></script>
 </body>
+
 </html>
