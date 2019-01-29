@@ -1,7 +1,7 @@
 var guessWord = "homework";
 var guessedRight = [];
 var wordLength;
-var guessesLeft = 13;
+var guessesLeft;
 var lettersLeft;
 var lettersGuessed = [];
 var lettersGuessIncorrect = [];
@@ -11,6 +11,11 @@ var correctMessage;
 var inputLetter
 var randomnum;
 var category;
+var win = 0;
+var loss = 0;
+var lossSound = "https://d3qhmae9zx9eb.cloudfront.net/ui/gameshow/amzn_ui_sfx_gameshow_negative_response_01.mp3"
+var winSound = "https://d3qhmae9zx9eb.cloudfront.net/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_01.mp3"
+var lossImage = "https://sayingimages.com/wp-content/uploads/good-fail-meme.png"
 var correct = document.getElementById('myList');
 var artists = ["Martin-Garrix",
     "Alan-Walker",
@@ -68,22 +73,36 @@ document.body.onkeyup = function (event) {
 
 
 function OutputStatus() {
-    document.getElementById("kp").innerHTML = inputLetter;
+    //document.getElementById("kp").innerHTML = inputLetter;
     //document.getElementById("wordBox").innerHTML = textOutput;
-    document.getElementById("guessRemaining").innerHTML = guessesLeft;
     document.getElementById("guessedL").innerHTML = lettersGuessIncorrect;
+    document.getElementById("guessRemaining").innerHTML = "You have " + guessesLeft + " lives.";
 }
 
 
 function resultOuput() {
     if (guessesLeft === 0) {
         timer();
+        loss = loss + 1;
+        var idclass = document.getElementById("status");
+        idclass.setAttribute('class', 'clear text-danger')
+        document.getElementById("lossScore").innerHTML = "<h3>" + loss + "</h3>"
+        document.getElementById("imageSRC").src = lossImage
+        var audio = new Audio(lossSound);
+        audio.play();
         return document.getElementById("status").innerHTML = failMessage;
 
     }
 
     else if (lettersLeft === 0) {
         timer();
+        win = win + 1;
+        var idclass = document.getElementById("status");
+        idclass.setAttribute('class', 'clear text-success')
+        document.getElementById("winScore").innerHTML = "<h3>" + win + "</h3>"
+        document.getElementById("videoSRC").src = "https://www.youtube.com/embed/gCYcHz2k5x0?rel=0"
+        var audio = new Audio(winSound);
+        audio.play();
         return document.getElementById("status").innerHTML = correctMessage;
         //document.getElementById("wordBox").innerHTML = textOutput;
     }
@@ -98,7 +117,7 @@ function gameOver(guessesLeft, lettersLeft) {
 
 
 function initGame() {
-    guessesLeft = 13;
+    guessesLeft = 8;
     guessedRight = [];
     lettersGuessIncorrect = [];
     lettersGuessed = [];
@@ -111,6 +130,7 @@ function initGame() {
     var classClear = document.getElementsByClassName("clear");
     for (var i = 0; i < classClear.length; i++) {
         classClear[i].innerHTML = "";
+        classClear[i].classList.remove("text-danger", "text-success")
     }
 
     console.log("initial: " + guessWord)
@@ -169,7 +189,7 @@ function wordReady(wordLength) {
 function timer() {
     var timeleft = 3;
     var downloadTimer = setInterval(function () {
-        document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
+        document.getElementById("countdown").innerHTML = "Restarting in " + timeleft + " seconds remaining";
         timeleft -= 1;
         if (timeleft <= 0) {
             clearInterval(downloadTimer);

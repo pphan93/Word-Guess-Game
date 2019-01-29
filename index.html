@@ -12,36 +12,56 @@
 
 </head>
 
-<body>
+<body class="bg-light">
     <div class="jumbotron jumbotron-fluid text-center">
-                <div class="
+        <div class="
         container">
-        <h1 class="display-4">Hangman</h1>
-        <p class="lead">Use the keyboard to guess the word. You have 13 lives before game over.</p>
-    </div>
+            <h1 class="display-4">Hangman</h1>
+            <p class="lead">Use the keyboard to guess the word. You have 13 lives.</p>
+        </div>
     </div>
 
-    <div class="container text-center">
-        <div id="gameContainer">
-            Key Pressed: <span class="clear" id="kp"></span>
-            <br>
-            WORD: <span class="clear" id="wordBox"></span>
-            <br>
-            <div id="hold">
-            </div>
-            <div id="listView">
-                <ul id="myList" class="myList-class">
-                </ul>
+    <div class="container text-center ">
+        <div class="row">
+            <div class="col md-6">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" id="videoSRC" src="" allowfullscreen></iframe>
+                </div>
+                <img src="#" id="imageSRC" class="img-fluid" alt="Responsive image">
             </div>
 
-            <br>
-            Guesses Remaining: <span class="clear" id="guessRemaining"></span>
-            <br>
-            Guessed Letters: <span class="clear" id="guessedL"></span>
-            <br>
-            STATUS: <span class="clear" id="status"></span>
-            <br>
-            Restart In: <div class="clear" id="countdown"></div>
+            <div class="col md-6 ">
+                <div id="gameContainer">
+                    <!--Key Pressed: <span class="clear" id="kp"></span>-->
+                    <div class="row border-bottom">
+                        <div class="col-lg-1">
+                            <h3>Win:</h3>
+                        </div>
+                        <div class="col-lg-2 text-success" id="winScore">
+                            <h3>0</h3>
+                        </div>
+                        <div class="col-lg-6" style=" text-align: center;">
+                            <h3>Score</h3>
+                        </div>
+                        <div class="col-lg-1">
+                            <h3>Loss:</h3>
+                        </div>
+                        <div class="col-lg-2 text-danger" id="lossScore">
+                            <h3>0</h3>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div id="listView">
+                        <ul id="myList" class="myList-class">
+                        </ul>
+                    </div>
+                    <div class="clear" id="guessRemaining"></div>
+                    Guessed Letters: <span class="clear" id="guessedL"></span>
+                    <div id="status" role="alert"></div>
+                    <div class="clear" id="countdown"></div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="./assets/javascript/game.js"></script>
