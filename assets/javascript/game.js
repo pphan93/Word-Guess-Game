@@ -17,26 +17,54 @@ var lossSound = "https://d3qhmae9zx9eb.cloudfront.net/ui/gameshow/amzn_ui_sfx_ga
 var winSound = "https://d3qhmae9zx9eb.cloudfront.net/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_01.mp3"
 var lossImage = "https://sayingimages.com/wp-content/uploads/good-fail-meme.png"
 var correct = document.getElementById('myList');
-var artists = ["Martin-Garrix",
-    "Alan-Walker",
-    "Marshmello",
-    "Illenium",
-    "Kygo",
-    "The-Chainsmokers",
-    "Adele",
-    "Drake",
-    "The-Weeknd",
-    "Taylor-Swift"]
-var type_artists = ["EDM Artist",
-    "EDM Artist",
-    "EDM Artist",
-    "EDM Artist",
-    "EDM Artist",
-    "EDM Artist",
-    "Pop Artist",
-    "Hip Hop Artist",
-    "R&B Artist",
-    "Pop Artist"]
+var countryName = [
+    "Afghanistan",
+    "Australia",
+    "Bahamas",
+    "Bulgaria",
+    "Belgium",
+    "Cambodia",
+    "Canada",
+    "China",
+    "Costa-Rica",
+    "Czech-Republic",
+    "Denmark",
+    "France",
+    "Germany",
+    "Italy",
+    "India",
+    "Japan",
+    "Korea",
+    "Liechtenstein",
+    "Malaysia",
+    "Norway",
+    "Vietnam",
+    "Thailand",
+    "Singapore"]
+var countryIso = [
+    "af",
+    "au",
+    "bs",
+    "bg",
+    "be",
+    "kh",
+    "ca",
+    "cn",
+    "cr",
+    "cz",
+    "dk",
+    "fr",
+    "de",
+    "it",
+    "in",
+    "jp",
+    "kr",
+    "li",
+    "my",
+    "no",
+    "vn",
+    "th",
+    "sg"]
 //var gameOver = false;
 
 failMessage = "YOU FAILED!";
@@ -62,7 +90,7 @@ console.log("testing: " + lettersLeft);
 document.body.onkeyup = function (event) {
 
     if (guessesLeft !== 0 && lettersLeft !== 0) {
-        inputLetter = String.fromCharCode(event.keyCode);
+        inputLetter = event.key.toUpperCase(event.keyCode);
         textOutput = guessCheck(inputLetter);
         OutputStatus();
         //var inputLetter = prompt("Type in a letter to guess: ");
@@ -100,7 +128,7 @@ function resultOuput() {
         var idclass = document.getElementById("status");
         idclass.setAttribute('class', 'clear text-success')
         document.getElementById("winScore").innerHTML = "<h3>" + win + "</h3>"
-        document.getElementById("videoSRC").src = "https://www.youtube.com/embed/gCYcHz2k5x0?rel=0"
+        document.getElementById("imageSRC").src = "http://flagpedia.net/data/flags/normal/" + countryIso[randomnum] +".png"
         var audio = new Audio(winSound);
         audio.play();
         return document.getElementById("status").innerHTML = correctMessage;
@@ -121,7 +149,8 @@ function initGame() {
     guessedRight = [];
     lettersGuessIncorrect = [];
     lettersGuessed = [];
-    myList.innerHTML = '';
+    correct.innerHTML = '';
+    document.getElementById("imageSRC").src = "assets/images/namesofcountries.jpg"
 
     getWord();
     wordLength = guessWord.length;
@@ -141,9 +170,9 @@ function initGame() {
 }
 
 function getWord() {
-    randomnum = Math.floor(Math.random() * artists.length);
-    category = type_artists[randomnum]
-    guessWord = artists[randomnum];
+    randomnum = Math.floor(Math.random() * countryName.length);
+    category = countryIso[randomnum]
+    guessWord = countryName[randomnum];
     console.log("Artist: " + guessWord + " Type: " + category)
     guessWord = guessWord.toUpperCase();
 }

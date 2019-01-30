@@ -12,45 +12,42 @@
 
 </head>
 
-<body class="bg-light">
+<body>
     <div class="jumbotron jumbotron-fluid text-center">
         <div class="
         container">
             <h1 class="display-4">Hangman</h1>
-            <p class="lead">Use the keyboard to guess the word. You have 13 lives.</p>
+            <p class="lead">Use the keyboard to guess the word. You have 8 lives.</p>
         </div>
     </div>
 
     <div class="container text-center ">
         <div class="row">
             <div class="col md-6">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" id="videoSRC" src="" allowfullscreen></iframe>
-                </div>
-                <img src="#" id="imageSRC" class="img-fluid" alt="Responsive image">
+                    <img class="img-fluid" id="imageSRC" src="assets/images/namesofcountries.jpg" alt="Names of Countries">
             </div>
 
             <div class="col md-6 ">
                 <div id="gameContainer">
                     <!--Key Pressed: <span class="clear" id="kp"></span>-->
-                    <div class="row border-bottom">
-                        <div class="col-lg-1">
-                            <h3>Win:</h3>
+                    <div class="row border-bottom" id="bord-color">
+                        <div class="col-lg-2">
+                            <h4>W:</h4>
                         </div>
-                        <div class="col-lg-2 text-success" id="winScore">
-                            <h3>0</h3>
+                        <div class="col-lg-1" id="winScore">
+                            <h4>0</h4>
                         </div>
-                        <div class="col-lg-6" style=" text-align: center;">
-                            <h3>Score</h3>
+                        <div class="col-lg-6" style="text-align: center;">
+                            <h4>Score</h4>
                         </div>
-                        <div class="col-lg-1">
-                            <h3>Loss:</h3>
+                        <div class="col-lg-2">
+                            <h4>L:</h4>
                         </div>
-                        <div class="col-lg-2 text-danger" id="lossScore">
-                            <h3>0</h3>
+                        <div class="col-lg-1" id="lossScore">
+                            <h4>0</h4>
                         </div>
                     </div>
-                    <br>
+                    
                     <br>
                     <div id="listView">
                         <ul id="myList" class="myList-class">

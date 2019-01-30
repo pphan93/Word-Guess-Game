@@ -1,3 +1,21 @@
+body{
+  background-color: #5f6368;
+  font-family: 'Roboto Condensed', sans-serif;
+  color: white;
+}
+
+#bord-color{
+  border-bottom:1px solid #1eb980 !important;
+}
+
+#lossScore{
+  color: #FF6859;
+}
+
+#winScore{
+  color: #72deff;
+}
+
 #myList {
   margin: 0;
   display: block;
@@ -11,10 +29,15 @@
   margin: 0;
   display: inline-block;
   padding: 0 10px;
-  font-size: 1.4em;
-  color: rgb(0, 204, 255);
+  font-size: 1.4vw;
+  color: #ffcf44;
+}
+
+.borderb {
+  border-bottom: 2em;
 }
 
 .jumbotron {
-  background-image: url('https://images.pexels.com/photos/655674/pexels-photo-655674.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+  background-color: #4b4e52;
+  /*background-image: url('https://images.pexels.com/photos/655674/pexels-photo-655674.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');*/
 }
