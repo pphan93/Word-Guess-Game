@@ -1,29 +1,29 @@
-body{
+body {
   background-color: #5f6368;
   font-family: 'Roboto Condensed', sans-serif;
   color: white;
 }
 
-#bord-color{
-  border-bottom:1px solid #1eb980 !important;
+#bord-color {
+  border-bottom: 1px solid #1eb980 !important;
 }
 
-#lossScore{
+#lossScore {
   color: #FF6859;
 }
 
-#winScore{
+#winScore {
   color: #72deff;
 }
 
-#myList {
+#lettersList {
   margin: 0;
   display: block;
   padding: 0;
   display: block;
 }
 
-#myList li {
+#lettersList li {
   position: relative;
   list-style: none;
   margin: 0;
