@@ -215,7 +215,7 @@ var hangman = {
 
     //output guessed incorrect letters and how many lives left
     OutputStatus: function () {
-        document.getElementById("guessedL").innerHTML = "Guessed Letters:" + lettersGuessIncorrect;
+        document.getElementById("guessedL").innerHTML = "Guessed Letters:" + lettersGuessIncorrect.join(" ");
         document.getElementById("guessRemaining").innerHTML = "You have " + guessesLeft + " lives.";
     },
 
@@ -249,6 +249,7 @@ var hangman = {
 
     }
 }
+
 
 hangman.initGame();
 
