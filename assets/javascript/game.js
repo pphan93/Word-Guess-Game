@@ -6,7 +6,7 @@ var lettersLeft; //track how many letters until player win - guessed all the let
 var lettersGuessed = []; //Keep track of all the letter guessed by player
 var lettersGuessIncorrect = []; //keep track of all the incorrect letters guessed to output to screen and for letter left
 var inputLetter; //store key that player typed
-var randomnum; //storing generated random number from the countryName array - get random country name from array
+var randomnum; //storing generated random number from the countryName array - use to get random country name from array
 var win = 0; //winning score
 var loss = 0; //loss score
 var i = 0
@@ -14,14 +14,16 @@ var i = 0
 var hangman = {
     alertAudio: document.createElement("audio"),
     //backgroundAudio: document.createElement("audio"),
-    failMessage: "YOU FAILED!",
-    correctMessage: "YOU WIN",
+    failMessage: "YOU FAIL!",
+    correctMessage: "YOU WIN!",
     lettersList: document.getElementById('lettersList'),
     lossSound: "https://d3qhmae9zx9eb.cloudfront.net/ui/gameshow/amzn_ui_sfx_gameshow_negative_response_01.mp3",
     winSound: "https://d3qhmae9zx9eb.cloudfront.net/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_01.mp3",
     lossImage: "https://sayingimages.com/wp-content/uploads/good-fail-meme.png",
     backgroundMusic: "https://www.bensound.org/bensound-music/bensound-memories.mp3",
     initialImage: "assets/images/namesofcountries.jpg",
+
+    //change image source to country flag
     outputImage: function (image) {
         document.getElementById("imageSRC").src = image
     },
@@ -49,6 +51,8 @@ var hangman = {
         "Vietnam",
         "Thailand",
         "Singapore"],
+
+    //Array for outputting the country flag ex. http://flagpedia.net/data/flags/normal/ca.png
     countryIso: [
         "af",
         "au",
@@ -80,11 +84,11 @@ var hangman = {
         guessedRight = [];
         lettersGuessIncorrect = [];
         lettersGuessed = [];
-        this.lettersList.innerHTML = '';
-        this.outputImage(this.initialImage);
-        this.getWord();
+        this.lettersList.innerHTML = ''; //remove the li from ul in html
+        this.outputImage(this.initialImage); //reset the initial image
+        this.getWord(); //get new words
         wordLength = guessWord.length;
-        this.wordReady(wordLength);
+        this.wordReady(wordLength); //get word ready - create li for each letter, store it in array, and out put it to screen
 
         //get all the html element with class "clear" and remove it from screen (innerHTML - Change the HTML content) 
         var classClear = document.getElementsByClassName("clear");
@@ -95,21 +99,18 @@ var hangman = {
             classClear[i].classList.remove("text-danger", "text-success")
         }
 
-        console.log("initial: " + guessWord)
-        console.log("initial: " + wordLength);
+        console.log("initial: " + guessWord) //Uncomment to get the word (cheat)
     },
 
     //randomly generate a number using .random to get a random word from countryName array and upper case it
     getWord: function () {
         randomnum = Math.floor(Math.random() * this.countryName.length);
         guessWord = this.countryName[randomnum];
-        console.log("Artist: " + guessWord)
         guessWord = guessWord.toUpperCase();
     },
 
     //create an html li (list) depend on word and out the ' _ _ _ _ _'
     wordReady: function (wordLength) {
-        console.log("SPace: " + wordLength)
         lettersLeft = wordLength;
 
         for (i = 0; i < wordLength; i++) {
@@ -117,7 +118,7 @@ var hangman = {
             guess = document.createElement('li');
             guess.setAttribute('class', 'guess');
             if (guessWord[i] === "-") {
-                //Ignore the - (spaces) of the word so user dont have guesses space or -
+                //Ignore the - (spaces) of the word so player doesn't have guesses space or -
                 guess.innerHTML = "-";
                 lettersLeft = lettersLeft - 1;
             }
@@ -126,34 +127,36 @@ var hangman = {
             }
             //store the li html code and text to arrays for change the _ to correct letter
             guessedRight.push(guess);
-            //add the html code between the id lettersList
+            //add the html code between the id lettersList (ul)
             this.lettersList.appendChild(guess);
         }
-        console.log("guess INIT: " + guess);
-        console.log(guessedRight);
     },
-    playSound: function(sound,loop,volume){
-        this.alertAudio.setAttribute("src",sound);
+
+    //play winning and losing sound
+    playSound: function (sound, loop, volume) {
+        this.alertAudio.setAttribute("src", sound);
 
         this.alertAudio.play();
         this.alertAudio.loop = loop;
         this.alertAudio.volume = volume;
     },
 
-    playBackground: function(sound,loop,volume){
-        var backgroundAudio= document.getElementById("audioB");
-        console.log(backgroundAudio.src)
+    //play background music - play and pause, on a loop, set volume
+    playBackground: function (sound, loop, volume) {
+        var backgroundAudio = document.getElementById("audioB");
 
-        if (backgroundAudio.src !== sound ){
-            backgroundAudio.src = sound; 
+        if (backgroundAudio.src !== sound) {
+            backgroundAudio.src = sound;
         }
 
+        //check if music is playing or not
         if (backgroundAudio.paused) {
             backgroundAudio.play();
             backgroundAudio.loop = loop;
+            //set volume of the music - too loud
             backgroundAudio.volume = volume;
         }
-        else{
+        else {
             backgroundAudio.pause();
         }
     },
@@ -171,7 +174,7 @@ var hangman = {
             //change the image source to fail image
             document.getElementById("imageSRC").src = this.lossImage;
             //play an fail audio
-            this.playSound(this.lossSound,false,.5);
+            this.playSound(this.lossSound, false, .5);
             return document.getElementById("status").innerHTML = this.failMessage;
 
         }
@@ -184,8 +187,9 @@ var hangman = {
             document.getElementById("winScore").innerHTML = "<h3>" + win + "</h3>"
             this.outputImage("http://flagpedia.net/data/flags/normal/" + this.countryIso[randomnum] + ".png");
             //play an fail audio
-            this.playSound(this.winSound,false,.5);
+            this.playSound(this.winSound, false, .5);
             return document.getElementById("status").innerHTML = this.correctMessage;
+
         }
     },
 
@@ -200,9 +204,9 @@ var hangman = {
     timer: function () {
         var timeleft = 3;
         var downloadTimer = setInterval(function () {
-            document.getElementById("countdown").innerHTML = "Restarting in " + timeleft + " seconds remaining";
+            document.getElementById("countdown").innerHTML = "Restarting in " + timeleft + " second(s)";
             timeleft -= 1;
-            if (timeleft <= 0) {
+            if (timeleft < 0) {
                 clearInterval(downloadTimer);
                 hangman.initGame();
             }
@@ -214,14 +218,11 @@ var hangman = {
         document.getElementById("guessedL").innerHTML = "Guessed Letters:" + lettersGuessIncorrect;
         document.getElementById("guessRemaining").innerHTML = "You have " + guessesLeft + " lives.";
     },
+
     guessCheck: function (inputLetter) {
-        console.log("Guessed RIght While BEG: " + guessedRight);
-        console.log("guessCHeckInput: " + inputLetter);
 
         //correct letter guesses
         var foundPosition = guessWord.indexOf(inputLetter)
-
-        console.log("foundPosition: " + foundPosition)
 
         //all letter guesses
         var foundPositionLGC = lettersGuessed.indexOf(inputLetter)
@@ -243,33 +244,24 @@ var hangman = {
                 guessedRight[foundPosition].innerHTML = inputLetter;
                 foundPosition = guessWord.indexOf(inputLetter, foundPosition + 1)
                 lettersLeft = lettersLeft - 1;
-                console.log("Guessed RIght While: " + guessedRight);
             }
         }
 
-        console.log("letterGuessed: " + lettersGuessed);
-        console.log("letterGuessedIncorrect: " + lettersGuessIncorrect);
-        console.log(guessedRight.toString());
-        console.log(lettersLeft);
-        console.log("GuessLeft: " + guessesLeft);
-        console.log(guessedRight);
-        return guessedRight;
     }
 }
 
-//hangman.playSound(hangman.backgroundMusic,true,.2);
-
 hangman.initGame();
-console.log("testing: " + lettersLeft);
 
 document.body.onkeyup = function (event) {
     inputLetter = event.key.toUpperCase(event.keyCode);
-    
-    if (inputLetter === "ENTER") {
-        hangman.playBackground(hangman.backgroundMusic,true,.2);
-    }
-    else{
 
+    //For playing and pausing the background music
+    if (inputLetter === "ENTER") {
+        hangman.playBackground(hangman.backgroundMusic, true, .2);
+    }
+    else {
+
+        //check the guess letter again the word, output the status
         if (guessesLeft !== 0 && lettersLeft !== 0) {
             hangman.guessCheck(inputLetter);
             hangman.OutputStatus();
